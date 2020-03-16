@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export POSIXLY_CORRECT=yes
