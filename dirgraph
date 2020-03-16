@@ -1,3 +1,32 @@
 #!/bin/sh
 
 export POSIXLY_CORRECT=yes
+
+# find . -type f -not -path "*/\.*"
+# also might add -prune
+# alternative way using regex is:
+# find . \( ! -regex '.*/\..*' \) -type f
+
+# set line ending to let find in the foreach loop split files with spaces in name correctly
+IFS=$'\n'
+
+cat1=0
+cat2=0
+cat3=0
+cat4=0
+cat5=0
+cat6=0
+cat7=0
+cat8=0
+cat9=0
+
+for line in `find $1 -type f -not -path '*/\.*'` ; do
+	size=`wc -c "$line" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'`
+
+	if [ $size -gt 100 ]; then
+		((cat1=cat1+1))
+#		$cat1=$cat1+1
+	fi
+done
+
+echo $cat1
