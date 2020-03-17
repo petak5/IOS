@@ -22,12 +22,12 @@ cat9=0
 
 size1=100					# 100 	B
 size2=1024					# 1		KiB
-((size3=1024 * 10))		# 10 	KiB
-((size4=1024 * 100))		# 100	KiB
-((size5=1024 * 1024))		# 1	MiB
-((size6=size5 * 10))		# 10	MiB
-((size7=size5 * 100))	# 100	MiB
-((size8=size5 * 1024))	# 1 GiB
+size3=$((1024 * 10))		# 10 	KiB
+size4=$((1024 * 100))		# 100	KiB
+size5=$((1024 * 1024))		# 1	MiB
+size6=$((size5 * 10))		# 10	MiB
+size7=$((size5 * 100))	# 100	MiB
+size8=$((size5 * 1024))	# 1 GiB
 
 for line in `find $1 -type f -not -path '*/\.*'` ; do
 	size=`wc -c "$line" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'`
