@@ -20,13 +20,45 @@ cat7=0
 cat8=0
 cat9=0
 
+size1=100					# 100 	B
+size2=1024					# 1		KiB
+((size3 = 1024 * 10))		# 10 	KiB
+((size4 = 1024 * 100))		# 100	KiB
+((size5 = 1024 * 1024))		# 1	MiB
+((size6 = $size5 * 10))		# 10	MiB
+((size7 = $size5 * 100))	# 100	MiB
+((size8 = size5 * 1024))	# 1 GiB
+
 for line in `find $1 -type f -not -path '*/\.*'` ; do
 	size=`wc -c "$line" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'`
 
-	if [ $size -gt 100 ]; then
-		((cat1=cat1+1))
-#		$cat1=$cat1+1
+	if [ $size -lt $size1 ]; then
+		((cat1 = cat1 + 1))
+	elif [ $size -lt $size2 ]; then
+		((cat2 = cat2 + 1))
+	elif [ $size -lt $size3 ]; then
+		((cat3 = cat3 + 1))
+	elif [ $size -lt $size4 ]; then
+		((cat4 = cat4 + 1))
+	elif [ $size -lt $size5 ]; then
+		((cat5 = cat5 + 1))
+	elif [ $size -lt $size6 ]; then
+		((cat6 = cat6 + 1))
+	elif [ $size -lt $size7 ]; then
+		((cat7 = cat7 + 1))
+	elif [ $size -lt $size8 ]; then
+		((cat8 = cat8 + 1))
+	else
+		((cat9 = cat9 + 1))
 	fi
 done
 
 echo $cat1
+echo $cat2
+echo $cat3
+echo $cat4
+echo $cat5
+echo $cat6
+echo $cat7
+echo $cat8
+echo $cat9
