@@ -83,6 +83,11 @@ for line in $(find "$path" -type d 2>/dev/null); do
 		if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | grep -c -v -E "$ivalue")" ]; then
 			dirs=$((dirs + 1))
 		fi
+	else
+		# if some file is not matched by the regex, count the folder
+		if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | grep -c "")" ]; then
+			dirs=$((dirs + 1))
+		fi
 	fi
 
 done
