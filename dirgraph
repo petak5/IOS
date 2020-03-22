@@ -177,7 +177,7 @@ fi
 
 LINE_LENGTH=79
 if [ -t 1 ]; then
-	LINE_LENGTH=$(tput cols)
+	LINE_LENGTH=$(tput cols)-1
 fi
 LINE_LENGTH=$((LINE_LENGTH - 12))
 
