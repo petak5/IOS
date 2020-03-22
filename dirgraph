@@ -44,7 +44,7 @@ usage()
 
 if [ "$#" -gt 4 ]; then
 	usage
-	exit 2
+	exit 1
 fi
 
 while getopts 'i:n' OPTION; do
@@ -57,8 +57,8 @@ while getopts 'i:n' OPTION; do
 			n=1
 			;;
 		*)
-			echo "WTF"
-			path="$OPTION"
+			usage
+			exit 1
 			;;
 	esac
 done
@@ -78,14 +78,15 @@ fi
 # loop through folders
 for line in $(find "$path" -type d 2>/dev/null); do
 
+	# if `-i` is provided
 	if [ $i -eq 1 ]; then
 		# if some file is not matched by the regex, count the folder
-		if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | grep -c -v -E "$ivalue")" ]; then
+		if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | grep -c -q -v -E "$ivalue")" ]; then
 			dirs=$((dirs + 1))
 		fi
 	else
 		# if some file is not matched by the regex, count the folder
-		if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | grep -c "")" ]; then
+		if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | wc -l)" ]; then
 			dirs=$((dirs + 1))
 		fi
 	fi
@@ -125,16 +126,101 @@ for line in $(find "$path" -type f 2>>/dev/null); do
 	fi
 done
 
+if [ $i -eq 1 ]; then
+	if [ $files -eq 0 ]; then
+		echo "FILE_ERE cannot ignore all files." 1>2
+		exit 1
+	fi
+fi
+
 echo "Root directory: $path"
 echo "Directories: $dirs"
 echo "All files: $files"
 echo "File size histogram:"
-echo "<100 B  : $cat1"
-echo "<1 KiB  : $cat2"
-echo "<10 KiB : $cat3"
-echo "<100 KiB: $cat4"
-echo "<1 MiB  : $cat5"
-echo "<10 MiB : $cat6"
-echo "<100 MiB: $cat7"
-echo "<1 GiB  : $cat8"
-echo ">=1 GiB : $cat9"
+
+max="$cat1"
+if [ "$cat2" -gt "$max" ]; then
+	max="$cat2"
+fi
+if [ "$cat3" -gt "$max" ]; then
+	max="$cat3"
+fi
+if [ "$cat4" -gt "$max" ]; then
+	max="$cat4"
+fi
+if [ "$cat5" -gt "$max" ]; then
+	max="$cat5"
+fi
+if [ "$cat6" -gt "$max" ]; then
+	max="$cat6"
+fi
+if [ "$cat7" -gt "$max" ]; then
+	max="$cat7"
+fi
+if [ "$cat8" -gt "$max" ]; then
+	max="$cat8"
+fi
+if [ "$cat9" -gt "$max" ]; then
+	max="$cat9"
+fi
+
+LINE_LENGTH=79
+if [ -t 1 ]; then
+	LINE_LENGTH=$(tput cols)
+fi
+LINE_LENGTH=$((LINE_LENGTH - 12))
+
+ratio=1
+if [ $n -eq 1 ]; then
+	if [ $max -eq 0 ]; then
+		ratio=1
+	else
+		ratio=$(echo "$LINE_LENGTH / $max" | bc -l)
+	fi
+fi
+
+printf "  <100 B  : "
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <1 KiB  : "
+x=$(echo "scale=0; $cat2 * $ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <10 KiB : "
+x=$(echo "scale=0; $cat3 * $ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <100 KiB: "
+x=$(echo "scale=0; $cat4*$ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <1 MiB  : "
+x=$(echo "scale=0; $cat5*$ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <10 MiB : "
+x=$(echo "scale=0; $cat6*$ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <100 MiB: "
+x=$(echo "scale=0; $cat7*$ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  <1 GiB  : "
+x=$(echo "scale=0; $cat8*$ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n  >=1 GiB : "
+x=$(echo "scale=0; $cat9*$ratio" | bc)
+for i in $(seq 1 1 "$x" 2>/dev/null); do
+	printf "#"
+done
+printf "\n"
