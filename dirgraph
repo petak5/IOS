@@ -76,42 +76,42 @@ if [ $# -eq 1 ]; then
 fi
 
 # loop through folders
-for line in `find "$path" -type d 2>/dev/null`; do
+for line in $(find "$path" -type d 2>/dev/null); do
 
 	# if some file is not matched by the regex, count the folder
-	if [ 0 -lt `find "$line" -type f 2>>/dev/null | grep -c -v -E "$ivalue"` ]; then
+	if [ 0 -lt "$(find "$line" -type f 2>>/dev/null | grep -c -v -E "$ivalue")" ]; then
 		dirs=$((dirs + 1))
 	fi
 
 done
 
-for line in `find "$path" -type f 2>>/dev/null`; do
+for line in $(find "$path" -type f 2>>/dev/null); do
 
 	if [ $i -eq 1 ]; then
-		if [ `basename "$line" | grep -E "$ivalue"` ]; then
+		if [ "$(basename "$line" | grep -E "$ivalue")" ]; then
 			continue
 		fi
 	fi
 
-	size=`wc -c "$line" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'`
+	size=$(wc -c "$line" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//')
 
 	files=$((files + 1))
 
-	if [ $size -lt $size1 ]; then
+	if [ "$size" -lt "$size1" ]; then
 		cat1=$((cat1 + 1))
-	elif [ $size -lt $size2 ]; then
+	elif [ "$size" -lt "$size2" ]; then
 		cat2=$((cat2 + 1))
-	elif [ $size -lt $size3 ]; then
+	elif [ "$size" -lt "$size3" ]; then
 		cat3=$((cat3 + 1))
-	elif [ $size -lt $size4 ]; then
+	elif [ "$size" -lt "$size4" ]; then
 		cat4=$((cat4 + 1))
-	elif [ $size -lt $size5 ]; then
+	elif [ "$size" -lt "$size5" ]; then
 		cat5=$((cat5 + 1))
-	elif [ $size -lt $size6 ]; then
+	elif [ "$size" -lt "$size6" ]; then
 		cat6=$((cat6 + 1))
-	elif [ $size -lt $size7 ]; then
+	elif [ "$size" -lt "$size7" ]; then
 		cat7=$((cat7 + 1))
-	elif [ $size -lt $size8 ]; then
+	elif [ "$size" -lt "$size8" ]; then
 		cat8=$((cat8 + 1))
 	else
 		cat9=$((cat9 + 1))
