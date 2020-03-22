@@ -86,7 +86,7 @@ for line in $command; do
 	# if `-i` is provided
 	if [ $i -eq 1 ]; then
 		# if some file is not matched by the regex, count the folder
-		if [ 0 -lt "$(find "$line" -type f 2>/dev/null | grep -c -q -v -E "$ivalue")" ]; then
+		if [ 0 -lt "$(find "$line" -type f 2>/dev/null | grep -c -v -E "$ivalue")" ]; then
 			dirs=$((dirs + 1))
 		fi
 	else
