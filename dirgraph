@@ -51,7 +51,7 @@ while getopts 'i:n' OPTION; do
 	case "$OPTION" in
 		i)
 			i=1
-			ivalue="$OPTARG"
+			ivalue=$(echo $OPTARG)
 			;;
 		n)
 			n=1
@@ -75,10 +75,11 @@ if [ $# -eq 1 ]; then
 	path="$1"
 fi
 
+: '
 # loop through folders
 command=$(find "$path" -type d 2>/dev/null)
 if [ $? -ne 0 ]; then
-	echo "An error occured" 1>&2
+	echo "An error occured" >&2
 	exit 1
 fi
 for line in $command; do
@@ -86,9 +87,27 @@ for line in $command; do
 	# if `-i` is provided
 	if [ $i -eq 1 ]; then
 		# if some file is not matched by the regex, count the folder
-		if [ 0 -lt "$(find "$line" -type f 2>/dev/null | grep -c -v -E "$ivalue")" ]; then
-			dirs=$((dirs + 1))
+		results=$(find "$line" -type f 2>/dev/null)
+		if [ $? -ne 0 ]; then
+			echo "An error occured" >&2
+			exit 1
 		fi
+		for res in $results; do
+			result=$((basename $result))
+			if [ $? -ne 0 ]; then
+				echo "An error occured" >&2
+				exit 1
+			fi
+			result=$(grep -c -v -E "$ivalue")
+			if [ $? -ne 0 ]; then
+				echo "An error occured" >&2
+				exit 1
+			fi
+			if [ 0 -lt "$result" ]; then
+				dirs=$((dirs + 1))
+				break
+			fi
+		done;
 	else
 		# if some file is not matched by the regex, count the folder
 		if [ 0 -lt "$(find "$line" -type f 2>/dev/null | wc -l)" ]; then
@@ -97,11 +116,37 @@ for line in $command; do
 	fi
 
 done
+'
+# loop through folders
+if ! command=$(find "$path" -type d 2>/dev/null); then
+	echo "An error occured" >&2
+	exit 1
+fi
+for line in $command; do
+
+	# if `-i` is provided
+	if [ $i -eq 1 ]; then
+		if ! x=$(find "$line" -type f -maxdepth 1 2>/dev/null); then
+			echo "An error occured" >&2
+			exit 1
+		fi
+		for f in $x; do
+			basename=$(basename "$f")
+			if echo "$basename" | grep -v -E "$ivalue" 1>/dev/null; then
+				dirs=$((dirs + 1))
+				break
+			fi
+		done
+	else
+		if [ 0 -lt "$(find "$line" -type f 2>/dev/null | wc -l)" ]; then
+			dirs=$((dirs + 1))
+		fi
+	fi
+done
 
 # loop through files
-command=$(find "$path" -type f 2>/dev/null)
-if [ $? -ne 0 ]; then
-	echo "An error occured" 1>&2
+if ! command=$(find "$path" -type f 2>/dev/null); then
+	echo "An error occured" >&2
 	exit 1
 fi
 for line in $command; do
@@ -139,7 +184,7 @@ done
 
 if [ $i -eq 1 ]; then
 	if [ $files -eq 0 ]; then
-		echo "FILE_ERE cannot ignore all files." 1>2
+		echo "FILE_ERE cannot ignore all files." >&2
 		exit 1
 	fi
 fi
@@ -183,8 +228,8 @@ fi
 LINE_LENGTH=$((LINE_LENGTH - 12))
 
 ratio=1
-if [ $n -eq 1 ]; then
-	if [ $max -eq 0 ]; then
+if [ "$n" -eq 1 ]; then
+	if [ $LINE_LENGTH -gt $max ]; then
 		ratio=1
 	else
 		ratio=$(echo "$LINE_LENGTH / $max" | bc -l)
@@ -192,6 +237,7 @@ if [ $n -eq 1 ]; then
 fi
 
 printf "  <100 B  : "
+x=$(echo "scale=0; $cat1 * $ratio" | bc)
 for i in $(seq 1 1 "$x" 2>/dev/null); do
 	printf "#"
 done
