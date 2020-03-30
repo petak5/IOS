@@ -157,7 +157,14 @@ for line in $command; do
 		fi
 	fi
 
-	size=$(wc -c "$line" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//')
+	if ! x=$(wc -c "$line" 2>/dev/null); then
+		echo "An error occured" >&2
+		exit 1
+	fi
+	if ! size=$(echo $x | grep -o -E '[0-9]+' 2>/dev/null | head -1 | sed -e 's/^0\+//'); then
+		echo "An error occured" >&2
+		exit 1
+	fi
 
 	files=$((files + 1))
 
