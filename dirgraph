@@ -1,11 +1,12 @@
 #!/bin/sh
 
-export POSIXLY_CORRECT=yes
+# File: dirgraph
+# Date: 30.3.2020
+# Author: Peter Urgos - xurgos00 (petak5) at Faculty of Information Technology, Brno University of Technology
+# Description: a shell utility to count files recursively and generate a graph representing file sizes
+# Usage: ./dirgraph [-i FILE_ERE] [-n] [DIR]
 
-# find . -type f -not -path "*/\.*"
-# also might add -prune
-# alternative way using regex is:
-# find . \( ! -regex '.*/\..*' \) -type f
+export POSIXLY_CORRECT=yes
 
 # set line ending to let find in the foreach loop split files with spaces in name correctly
 IFS=$'\n'
