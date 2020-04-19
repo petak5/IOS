@@ -1,0 +1,358 @@
+1	: JUDGE		: wants to enter
+2	: JUDGE		: enters		: 0	: 0	: 0
+3	: JUDGE		: starts confirmation	: 0	: 0	: 0
+4	: JUDGE		: ends confirmation	: 0	: 0	: 0
+5	: JUDGE		: leaves		: 0	: 0	: 0
+6	: IMM 1		: starts
+7	: IMM 1		: enters		: 1	: 0	: 1
+8	: IMM 1		: checks		: 1	: 1	: 1
+9	: IMM 2		: starts
+10	: IMM 2		: enters		: 2	: 1	: 2
+11	: IMM 2		: checks		: 2	: 2	: 2
+12	: IMM 3		: starts
+13	: IMM 3		: enters		: 3	: 2	: 3
+14	: IMM 3		: checks		: 3	: 3	: 3
+15	: IMM 4		: starts
+16	: IMM 4		: enters		: 4	: 3	: 4
+17	: IMM 4		: checks		: 4	: 4	: 4
+18	: IMM 5		: starts
+19	: IMM 5		: enters		: 5	: 4	: 5
+20	: IMM 5		: checks		: 5	: 5	: 5
+21	: JUDGE		: wants to enter
+22	: JUDGE		: enters		: 5	: 5	: 5
+23	: JUDGE		: starts confirmation	: 5	: 5	: 5
+24	: JUDGE		: ends confirmation	: 0	: 0	: 5
+25	: IMM 1		: wants certificate	: 0	: 0	: 5
+26	: IMM 2		: wants certificate	: 0	: 0	: 5
+27	: IMM 1		: got certificate	: 0	: 0	: 5
+28	: IMM 2		: got certificate	: 0	: 0	: 5
+29	: IMM 3		: wants certificate	: 0	: 0	: 5
+30	: IMM 3		: got certificate	: 0	: 0	: 5
+31	: IMM 4		: wants certificate	: 0	: 0	: 5
+32	: IMM 5		: wants certificate	: 0	: 0	: 5
+33	: IMM 4		: got certificate	: 0	: 0	: 5
+34	: IMM 6		: starts
+35	: JUDGE		: leaves		: 0	: 0	: 5
+36	: IMM 5		: got certificate	: 0	: 0	: 5
+37	: IMM 1		: leaves		: 0	: 0	: 4
+38	: IMM 2		: leaves		: 0	: 0	: 3
+39	: IMM 3		: leaves		: 0	: 0	: 2
+40	: IMM 7		: starts
+41	: IMM 4		: leaves		: 0	: 0	: 1
+42	: IMM 6		: enters		: 1	: 0	: 2
+43	: IMM 8		: starts
+44	: IMM 5		: leaves		: 1	: 0	: 1
+45	: IMM 7		: enters		: 2	: 0	: 2
+46	: IMM 6		: checks		: 2	: 1	: 2
+47	: IMM 8		: enters		: 3	: 1	: 3
+48	: IMM 7		: checks		: 3	: 2	: 3
+49	: IMM 8		: checks		: 3	: 3	: 3
+50	: IMM 9		: starts
+51	: IMM 9		: enters		: 4	: 3	: 4
+52	: IMM 9		: checks		: 4	: 4	: 4
+53	: IMM 10		: starts
+54	: IMM 10		: enters		: 5	: 4	: 5
+55	: IMM 10		: checks		: 5	: 5	: 5
+56	: JUDGE		: wants to enter
+57	: JUDGE		: enters		: 5	: 5	: 5
+58	: JUDGE		: starts confirmation	: 5	: 5	: 5
+59	: JUDGE		: ends confirmation	: 0	: 0	: 5
+60	: IMM 11		: starts
+61	: IMM 6		: wants certificate	: 0	: 0	: 5
+62	: IMM 6		: got certificate	: 0	: 0	: 5
+63	: IMM 7		: wants certificate	: 0	: 0	: 5
+64	: IMM 8		: wants certificate	: 0	: 0	: 5
+65	: IMM 9		: wants certificate	: 0	: 0	: 5
+66	: IMM 7		: got certificate	: 0	: 0	: 5
+67	: IMM 10		: wants certificate	: 0	: 0	: 5
+68	: IMM 8		: got certificate	: 0	: 0	: 5
+69	: IMM 9		: got certificate	: 0	: 0	: 5
+70	: IMM 10		: got certificate	: 0	: 0	: 5
+71	: JUDGE		: leaves		: 0	: 0	: 5
+72	: IMM 11		: enters		: 1	: 0	: 6
+73	: IMM 6		: leaves		: 1	: 0	: 5
+74	: IMM 7		: leaves		: 1	: 0	: 4
+75	: IMM 11		: checks		: 1	: 1	: 4
+76	: IMM 8		: leaves		: 1	: 1	: 3
+77	: IMM 9		: leaves		: 1	: 1	: 2
+78	: IMM 10		: leaves		: 1	: 1	: 1
+79	: IMM 12		: starts
+80	: IMM 12		: enters		: 2	: 1	: 2
+81	: IMM 12		: checks		: 2	: 2	: 2
+82	: IMM 13		: starts
+83	: IMM 13		: enters		: 3	: 2	: 3
+84	: IMM 13		: checks		: 3	: 3	: 3
+85	: IMM 14		: starts
+86	: IMM 14		: enters		: 4	: 3	: 4
+87	: IMM 14		: checks		: 4	: 4	: 4
+88	: JUDGE		: wants to enter
+89	: JUDGE		: enters		: 4	: 4	: 4
+90	: JUDGE		: starts confirmation	: 4	: 4	: 4
+91	: JUDGE		: ends confirmation	: 0	: 0	: 4
+92	: IMM 11		: wants certificate	: 0	: 0	: 4
+93	: IMM 12		: wants certificate	: 0	: 0	: 4
+94	: IMM 11		: got certificate	: 0	: 0	: 4
+95	: IMM 13		: wants certificate	: 0	: 0	: 4
+96	: IMM 15		: starts
+97	: IMM 12		: got certificate	: 0	: 0	: 4
+98	: IMM 13		: got certificate	: 0	: 0	: 4
+99	: IMM 14		: wants certificate	: 0	: 0	: 4
+100	: IMM 14		: got certificate	: 0	: 0	: 4
+101	: IMM 16		: starts
+102	: JUDGE		: leaves		: 0	: 0	: 4
+103	: IMM 11		: leaves		: 0	: 0	: 3
+104	: IMM 15		: enters		: 1	: 0	: 4
+105	: IMM 12		: leaves		: 1	: 0	: 3
+106	: IMM 17		: starts
+107	: IMM 15		: checks		: 1	: 1	: 2
+108	: IMM 13		: leaves		: 1	: 0	: 2
+109	: IMM 14		: leaves		: 1	: 1	: 1
+110	: IMM 16		: enters		: 2	: 1	: 2
+111	: IMM 17		: enters		: 3	: 1	: 3
+112	: IMM 16		: checks		: 3	: 2	: 3
+113	: IMM 18		: starts
+114	: IMM 17		: checks		: 3	: 3	: 3
+115	: IMM 18		: enters		: 4	: 3	: 4
+116	: IMM 19		: starts
+117	: IMM 19		: enters		: 5	: 3	: 5
+118	: IMM 18		: checks		: 5	: 4	: 5
+119	: IMM 19		: checks		: 5	: 5	: 5
+120	: IMM 20		: starts
+121	: IMM 20		: enters		: 6	: 5	: 6
+122	: IMM 20		: checks		: 6	: 6	: 6
+123	: IMM 21		: starts
+124	: IMM 21		: enters		: 7	: 6	: 7
+125	: IMM 21		: checks		: 7	: 7	: 7
+126	: IMM 22		: starts
+127	: IMM 22		: enters		: 8	: 7	: 8
+128	: IMM 22		: checks		: 8	: 8	: 8
+129	: IMM 23		: starts
+130	: IMM 23		: enters		: 9	: 8	: 9
+131	: IMM 23		: checks		: 9	: 9	: 9
+132	: IMM 24		: starts
+133	: IMM 24		: enters		: 10	: 9	: 10
+134	: IMM 24		: checks		: 10	: 10	: 10
+135	: IMM 25		: starts
+136	: IMM 25		: enters		: 11	: 10	: 11
+137	: IMM 25		: checks		: 11	: 11	: 11
+138	: IMM 26		: starts
+139	: IMM 26		: enters		: 12	: 11	: 12
+140	: IMM 26		: checks		: 12	: 12	: 12
+141	: IMM 27		: starts
+142	: IMM 27		: enters		: 13	: 12	: 13
+143	: IMM 27		: checks		: 13	: 13	: 13
+144	: JUDGE		: wants to enter
+145	: JUDGE		: enters		: 13	: 13	: 13
+146	: JUDGE		: starts confirmation	: 13	: 13	: 13
+147	: JUDGE		: ends confirmation	: 0	: 0	: 13
+148	: IMM 15		: wants certificate	: 0	: 0	: 13
+149	: IMM 15		: got certificate	: 0	: 0	: 13
+150	: IMM 16		: wants certificate	: 0	: 0	: 13
+151	: IMM 17		: wants certificate	: 0	: 0	: 13
+152	: IMM 18		: wants certificate	: 0	: 0	: 13
+153	: IMM 19		: wants certificate	: 0	: 0	: 13
+154	: IMM 18		: got certificate	: 0	: 0	: 13
+155	: IMM 16		: got certificate	: 0	: 0	: 13
+156	: IMM 19		: got certificate	: 0	: 0	: 13
+157	: IMM 21		: wants certificate	: 0	: 0	: 13
+158	: IMM 20		: wants certificate	: 0	: 0	: 13
+159	: IMM 17		: got certificate	: 0	: 0	: 13
+160	: IMM 21		: got certificate	: 0	: 0	: 13
+161	: IMM 22		: wants certificate	: 0	: 0	: 13
+162	: IMM 23		: wants certificate	: 0	: 0	: 13
+163	: IMM 20		: got certificate	: 0	: 0	: 13
+164	: IMM 22		: got certificate	: 0	: 0	: 13
+165	: IMM 24		: wants certificate	: 0	: 0	: 13
+166	: IMM 23		: got certificate	: 0	: 0	: 13
+167	: IMM 25		: wants certificate	: 0	: 0	: 13
+168	: IMM 24		: got certificate	: 0	: 0	: 13
+169	: IMM 28		: starts
+170	: IMM 25		: got certificate	: 0	: 0	: 13
+171	: IMM 26		: wants certificate	: 0	: 0	: 13
+172	: IMM 27		: wants certificate	: 0	: 0	: 13
+173	: IMM 26		: got certificate	: 0	: 0	: 13
+174	: IMM 27		: got certificate	: 0	: 0	: 13
+175	: JUDGE		: leaves		: 0	: 0	: 13
+176	: IMM 15		: leaves		: 0	: 0	: 12
+177	: IMM 18		: leaves		: 0	: 0	: 11
+178	: IMM 16		: leaves		: 0	: 0	: 10
+179	: JUDGE		: wants to enter
+180	: IMM 19		: leaves		: 0	: 0	: 9
+181	: IMM 21		: leaves		: 0	: 0	: 8
+182	: IMM 17		: leaves		: 0	: 0	: 7
+183	: IMM 20		: leaves		: 0	: 0	: 6
+184	: IMM 22		: leaves		: 0	: 0	: 5
+185	: IMM 23		: leaves		: 0	: 0	: 4
+186	: IMM 24		: leaves		: 0	: 0	: 3
+187	: IMM 28		: enters		: 1	: 0	: 4
+188	: IMM 25		: leaves		: 1	: 0	: 3
+189	: IMM 28		: checks		: 1	: 1	: 3
+190	: IMM 29		: starts
+191	: IMM 29		: enters		: 2	: 1	: 4
+192	: IMM 27		: leaves		: 2	: 1	: 3
+193	: JUDGE		: enters		: 2	: 1	: 3
+194	: JUDGE		: waits for imm		: 2	: 1	: 3
+195	: IMM 29		: checks		: 2	: 2	: 3
+196	: JUDGE		: starts confirmation	: 2	: 2	: 3
+197	: JUDGE		: ends confirmation	: 0	: 0	: 3
+198	: IMM 28		: wants certificate	: 0	: 0	: 3
+199	: IMM 29		: wants certificate	: 0	: 0	: 3
+200	: IMM 28		: got certificate	: 0	: 0	: 3
+201	: IMM 29		: got certificate	: 0	: 0	: 3
+202	: JUDGE		: leaves		: 0	: 0	: 3
+203	: IMM 28		: leaves		: 0	: 0	: 2
+204	: IMM 29		: leaves		: 0	: 0	: 1
+205	: IMM 30		: starts
+206	: IMM 30		: enters		: 1	: 0	: 2
+207	: IMM 30		: checks		: 1	: 1	: 2
+208	: IMM 26		: leaves		: 1	: 1	: 1
+209	: IMM 31		: starts
+210	: IMM 31		: enters		: 2	: 1	: 2
+211	: IMM 32		: starts
+212	: IMM 32		: enters		: 3	: 1	: 3
+213	: IMM 31		: checks		: 3	: 2	: 3
+214	: IMM 32		: checks		: 3	: 3	: 3
+215	: IMM 33		: starts
+216	: JUDGE		: wants to enter
+217	: IMM 33		: enters		: 4	: 3	: 4
+218	: JUDGE		: enters		: 4	: 3	: 4
+219	: JUDGE		: waits for imm		: 4	: 3	: 4
+220	: IMM 34		: starts
+221	: IMM 33		: checks		: 4	: 4	: 4
+222	: JUDGE		: starts confirmation	: 4	: 4	: 4
+223	: JUDGE		: ends confirmation	: 0	: 0	: 4
+224	: IMM 33		: wants certificate	: 0	: 0	: 4
+225	: IMM 31		: wants certificate	: 0	: 0	: 4
+226	: IMM 33		: got certificate	: 0	: 0	: 4
+227	: IMM 32		: wants certificate	: 0	: 0	: 4
+228	: IMM 31		: got certificate	: 0	: 0	: 4
+229	: IMM 32		: got certificate	: 0	: 0	: 4
+230	: IMM 30		: wants certificate	: 0	: 0	: 4
+231	: JUDGE		: leaves		: 0	: 0	: 4
+232	: IMM 30		: got certificate	: 0	: 0	: 4
+233	: IMM 34		: enters		: 1	: 0	: 5
+234	: IMM 33		: leaves		: 1	: 0	: 4
+235	: IMM 31		: leaves		: 1	: 0	: 3
+236	: IMM 34		: checks		: 1	: 1	: 3
+237	: JUDGE		: wants to enter
+238	: JUDGE		: enters		: 1	: 1	: 3
+239	: JUDGE		: starts confirmation	: 1	: 1	: 3
+240	: JUDGE		: ends confirmation	: 0	: 0	: 3
+241	: IMM 34		: wants certificate	: 0	: 0	: 3
+242	: IMM 34		: got certificate	: 0	: 0	: 3
+243	: JUDGE		: leaves		: 0	: 0	: 3
+244	: IMM 30		: leaves		: 0	: 0	: 2
+245	: IMM 32		: leaves		: 0	: 0	: 1
+246	: IMM 34		: leaves		: 0	: 0	: 0
+247	: IMM 35		: starts
+248	: IMM 35		: enters		: 1	: 0	: 1
+249	: IMM 35		: checks		: 1	: 1	: 1
+250	: IMM 36		: starts
+251	: IMM 36		: enters		: 2	: 1	: 2
+252	: IMM 36		: checks		: 2	: 2	: 2
+253	: JUDGE		: wants to enter
+254	: JUDGE		: enters		: 2	: 2	: 2
+255	: JUDGE		: starts confirmation	: 2	: 2	: 2
+256	: JUDGE		: ends confirmation	: 0	: 0	: 2
+257	: IMM 35		: wants certificate	: 0	: 0	: 2
+258	: IMM 35		: got certificate	: 0	: 0	: 2
+259	: IMM 36		: wants certificate	: 0	: 0	: 2
+260	: IMM 36		: got certificate	: 0	: 0	: 2
+261	: JUDGE		: leaves		: 0	: 0	: 2
+262	: IMM 35		: leaves		: 0	: 0	: 1
+263	: IMM 36		: leaves		: 0	: 0	: 0
+264	: IMM 37		: starts
+265	: IMM 37		: enters		: 1	: 0	: 1
+266	: IMM 37		: checks		: 1	: 1	: 1
+267	: IMM 38		: starts
+268	: IMM 38		: enters		: 2	: 1	: 2
+269	: IMM 38		: checks		: 2	: 2	: 2
+270	: IMM 39		: starts
+271	: IMM 39		: enters		: 3	: 2	: 3
+272	: IMM 39		: checks		: 3	: 3	: 3
+273	: IMM 40		: starts
+274	: IMM 40		: enters		: 4	: 3	: 4
+275	: IMM 40		: checks		: 4	: 4	: 4
+276	: IMM 41		: starts
+277	: IMM 41		: enters		: 5	: 4	: 5
+278	: IMM 41		: checks		: 5	: 5	: 5
+279	: IMM 42		: starts
+280	: IMM 42		: enters		: 6	: 5	: 6
+281	: IMM 42		: checks		: 6	: 6	: 6
+282	: JUDGE		: wants to enter
+283	: JUDGE		: enters		: 6	: 6	: 6
+284	: JUDGE		: starts confirmation	: 6	: 6	: 6
+285	: IMM 43		: starts
+286	: JUDGE		: ends confirmation	: 0	: 0	: 6
+287	: IMM 37		: wants certificate	: 0	: 0	: 6
+288	: IMM 38		: wants certificate	: 0	: 0	: 6
+289	: IMM 37		: got certificate	: 0	: 0	: 6
+290	: IMM 39		: wants certificate	: 0	: 0	: 6
+291	: IMM 40		: wants certificate	: 0	: 0	: 6
+292	: IMM 38		: got certificate	: 0	: 0	: 6
+293	: IMM 41		: wants certificate	: 0	: 0	: 6
+294	: IMM 40		: got certificate	: 0	: 0	: 6
+295	: IMM 39		: got certificate	: 0	: 0	: 6
+296	: IMM 42		: wants certificate	: 0	: 0	: 6
+297	: IMM 41		: got certificate	: 0	: 0	: 6
+298	: JUDGE		: leaves		: 0	: 0	: 6
+299	: IMM 42		: got certificate	: 0	: 0	: 6
+300	: IMM 43		: enters		: 1	: 0	: 7
+301	: IMM 37		: leaves		: 1	: 0	: 6
+302	: IMM 38		: leaves		: 1	: 0	: 5
+303	: IMM 40		: leaves		: 1	: 0	: 4
+304	: IMM 43		: checks		: 1	: 1	: 4
+305	: IMM 39		: leaves		: 1	: 1	: 3
+306	: IMM 41		: leaves		: 1	: 1	: 2
+307	: IMM 42		: leaves		: 1	: 1	: 1
+308	: IMM 44		: starts
+309	: IMM 44		: enters		: 2	: 1	: 2
+310	: IMM 44		: checks		: 2	: 2	: 2
+311	: IMM 45		: starts
+312	: IMM 45		: enters		: 3	: 2	: 3
+313	: IMM 45		: checks		: 3	: 3	: 3
+314	: IMM 46		: starts
+315	: IMM 46		: enters		: 4	: 3	: 4
+316	: IMM 46		: checks		: 4	: 4	: 4
+317	: IMM 47		: starts
+318	: IMM 47		: enters		: 5	: 4	: 5
+319	: IMM 47		: checks		: 5	: 5	: 5
+320	: IMM 48		: starts
+321	: IMM 48		: enters		: 6	: 5	: 6
+322	: IMM 48		: checks		: 6	: 6	: 6
+323	: IMM 49		: starts
+324	: IMM 49		: enters		: 7	: 6	: 7
+325	: IMM 49		: checks		: 7	: 7	: 7
+326	: IMM 50		: starts
+327	: IMM 50		: enters		: 8	: 7	: 8
+328	: IMM 50		: checks		: 8	: 8	: 8
+329	: JUDGE		: wants to enter
+330	: JUDGE		: enters		: 8	: 8	: 8
+331	: JUDGE		: starts confirmation	: 8	: 8	: 8
+332	: JUDGE		: ends confirmation	: 0	: 0	: 8
+333	: IMM 43		: wants certificate	: 0	: 0	: 8
+334	: IMM 44		: wants certificate	: 0	: 0	: 8
+335	: IMM 43		: got certificate	: 0	: 0	: 8
+336	: IMM 45		: wants certificate	: 0	: 0	: 8
+337	: IMM 44		: got certificate	: 0	: 0	: 8
+338	: IMM 46		: wants certificate	: 0	: 0	: 8
+339	: IMM 45		: got certificate	: 0	: 0	: 8
+340	: IMM 47		: wants certificate	: 0	: 0	: 8
+341	: IMM 48		: wants certificate	: 0	: 0	: 8
+342	: IMM 46		: got certificate	: 0	: 0	: 8
+343	: IMM 49		: wants certificate	: 0	: 0	: 8
+344	: IMM 47		: got certificate	: 0	: 0	: 8
+345	: IMM 48		: got certificate	: 0	: 0	: 8
+346	: IMM 50		: wants certificate	: 0	: 0	: 8
+347	: IMM 49		: got certificate	: 0	: 0	: 8
+348	: IMM 50		: got certificate	: 0	: 0	: 8
+349	: JUDGE		: leaves		: 0	: 0	: 8
+350	: IMM 43		: leaves		: 0	: 0	: 7
+351	: JUDGE		: finishes
+352	: IMM 44		: leaves		: 0	: 0	: 6
+353	: IMM 45		: leaves		: 0	: 0	: 5
+354	: IMM 46		: leaves		: 0	: 0	: 4
+355	: IMM 47		: leaves		: 0	: 0	: 3
+356	: IMM 48		: leaves		: 0	: 0	: 2
+357	: IMM 49		: leaves		: 0	: 0	: 1
+358	: IMM 50		: leaves		: 0	: 0	: 0
