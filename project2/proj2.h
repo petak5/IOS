@@ -9,7 +9,7 @@
 #define FILE_PATH "proj2.out"
 
 typedef struct params {
-    int PI;
+    long PI;
     int IG;
     int JG;
     int IT;
