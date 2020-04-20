@@ -4,6 +4,15 @@ int main(int argc, char *argv[])
 {
     params_t par = parse_params(argc, argv);
 
+    FILE *f = fopen(FILE_PATH, "w");
+    if (f == NULL)
+    {
+        fprintf(stderr, FAILED_TOP_OPEN_FILE);
+        return 1;
+    }
+
+    fclose(f);
+
     return 0;
 }
 
