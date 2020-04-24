@@ -12,7 +12,7 @@ $(PROJ).o: $(PROJ).c $(PROJ).h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o $(PROJ)
+	rm -f *.o *.out $(PROJ)
 
 zip: $(PROJ).c $(PROJ).h
 	zip xurgos00.zip *.c *.h Makefile
