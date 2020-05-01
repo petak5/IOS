@@ -49,7 +49,10 @@ void judge(params_t par)
     long count_of_confirmed = 0;
     while (count_of_confirmed < par.PI)
     {
-        usleep((random() % (par.JG)) * 1000);
+        if (par.JG != 0)
+        {
+            usleep((random() % (par.JG)) * 1000);
+        }
 
         // want to enter
         sem_wait(sem.write);
@@ -83,7 +86,10 @@ void judge(params_t par)
         sm->A++;
         sem_post(sem.write);
 
-        usleep((random() % (par.JT)) * 1000);
+        if (par.JT != 0)
+        {
+            usleep((random() % (par.JT)) * 1000);
+        }
 
         // end confirmation
         sem_wait(sem.write);
@@ -98,7 +104,10 @@ void judge(params_t par)
         sm->A++;
         sem_post(sem.write);
 
-        usleep((random() % (par.JT)) * 1000);
+        if (par.JT != 0)
+        {
+            usleep((random() % (par.JT)) * 1000);
+        }
         
         // leave
         sem_wait(sem.write);
@@ -125,7 +134,10 @@ void imm_gen(params_t par)
 
     for (long i = 0; i < par.PI; i++)
     {
-        usleep((random() % (par.IG)) * 1000);
+        if (par.IG != 0)
+        {
+            usleep((random() % (par.IG)) * 1000);
+        }
 
         pid_t new_pid = fork();
         if (new_pid == 0)
@@ -193,7 +205,10 @@ void immigrant(params_t par, int number)
     sm->A++;
     sem_post(sem.write);
 
-    usleep((random() % (par.IT)) * 1000);
+    if (par.IT != 0)
+    {
+        usleep((random() % (par.IT)) * 1000);
+    }
 
     // get certificate
     sem_wait(sem.write);
