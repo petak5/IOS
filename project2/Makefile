@@ -15,4 +15,4 @@ clean:
 	rm -f *.o *.out $(PROJ)
 
 zip: $(PROJ).c $(PROJ).h
-	zip xurgos00.zip *.c *.h Makefile
+	zip proj2.zip *.c *.h Makefile
