@@ -10,17 +10,7 @@ int main(int argc, char *argv[])
 
     init_resources();
 
-    // Judge
-    pid_t judge_pid = fork();
-    if (judge_pid == 0)
-    {
-        judge(par);
-    }
-    else if (judge_pid < 0)
-    {
-        fprintf(stderr, "Error: failed to fork this process.\n");
-        return 1;
-    }
+    setvbuf(f, NULL, _IONBF, 0);
 
     // Immigrants generator
     pid_t imm_gen_pid = fork();
@@ -34,12 +24,20 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    waitpid(judge_pid, NULL, 0);
-    waitpid(imm_gen_pid, NULL, 0);
+    // Judge
+    pid_t judge_pid = fork();
+    if (judge_pid == 0)
+    {
+        judge(par);
+    }
+    else if (judge_pid < 0)
+    {
+        fprintf(stderr, "Error: failed to fork this process.\n");
+        return 1;
+    }
 
-    sem_wait(sem.write);
-    fprintf(f, "Main process finishing...\n");
-    sem_post(sem.write);
+    waitpid(imm_gen_pid, NULL, 0);
+    waitpid(judge_pid, NULL, 0);
 
     free_resources();
 
@@ -48,11 +46,74 @@ int main(int argc, char *argv[])
 
 void judge(params_t par)
 {
-    usleep((random() % (par.JG)) * 1000);
+    long count_of_confirmed = 0;
+    while (count_of_confirmed < par.PI)
+    {
+        usleep((random() % (par.JG)) * 1000);
 
+        // want to enter
+        sem_wait(sem.write);
+        fprintf(f, "%d\t: JUDGE\t\t: wants to enter\n", sm->A);
+        sm->A++;
+        sem_post(sem.write);
+
+        // enter
+        sem_wait(sem.noJudge);
+        sem_wait(sem.checked);
+        sem_wait(sem.write);
+        fprintf(f, "%d\t: JUDGE\t\t: enters\t\t\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, sm->NE, sm->NC, sm->NB);
+        sm->A++;
+        sm->judge_entered = 1;
+        sem_post(sem.write);
+
+        if (sm->NE > sm->NC)
+        {
+            sem_wait(sem.write);
+            fprintf(f, "%d\t: JUDGE\t\t: waits for imm\t: %d\t\t\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, 0, sm->NE, sm->NC, sm->NB);
+            sm->A++;
+            sem_post(sem.write);
+
+            sem_post(sem.checked);
+            sem_wait(sem.allSignedIn);
+        }
+
+        // start confirmation
+        sem_wait(sem.write);
+        fprintf(f, "%d\t: JUDGE\t\t: starts confirmation\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, sm->NE, sm->NC, sm->NB);
+        sm->A++;
+        sem_post(sem.write);
+
+        usleep((random() % (par.JT)) * 1000);
+
+        // end confirmation
+        sem_wait(sem.write);
+        for (int i = 0; i < sm->NC; i++)
+        {
+            sem_post(sem.confirmed);
+        }
+        count_of_confirmed += sm->NC;
+        sm->NE = 0;
+        sm->NC = 0;
+        fprintf(f, "%d\t: JUDGE\t\t: ends confirmation\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, sm->NE, sm->NC, sm->NB);
+        sm->A++;
+        sem_post(sem.write);
+
+        usleep((random() % (par.JT)) * 1000);
+        
+        // leave
+        sem_wait(sem.write);
+        fprintf(f, "%d\t: JUDGE\t\t: leaves\t\t\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, sm->NE, sm->NC, sm->NB);
+        sm->A++;
+        sm->judge_entered = 0;
+        sem_post(sem.checked);
+        sem_post(sem.noJudge);
+        sem_post(sem.write);
+    }
+
+    // finish
     sem_wait(sem.write);
-    fprintf(f, "%d  JUDGE   wants to enter.\n", sm->message_count);
-    sm->message_count++;
+    fprintf(f, "%d\t: JUDGE\t\t: finishes\n", sm->A);
+    sm->A++;
     sem_post(sem.write);
 
     exit(0);
@@ -60,19 +121,94 @@ void judge(params_t par)
 
 void imm_gen(params_t par)
 {
-    sem_wait(sem.write);
-    fprintf(f, "%d  Generating immigrants.\n", sm->message_count);
-    sm->message_count++;
-    sem_post(sem.write);
+    pid_t pids[par.PI];
 
-    if (par.PI == 0) exit(0);
+    for (long i = 0; i < par.PI; i++)
+    {
+        usleep((random() % (par.IG)) * 1000);
+
+        pid_t new_pid = fork();
+        if (new_pid == 0)
+        {
+            immigrant(par, i);
+        }
+        else if (new_pid < 0)
+        {
+            fprintf(stderr, "Error: failed to fork this process.\n");
+            exit(1);
+        }
+
+        pids[i] = new_pid;
+    }
+    
+    for (long i = 0; i < par.PI; i++)
+    {
+        waitpid(pids[i], NULL, 0);
+    }
 
     exit(0);
 }
 
-void immigrant(params_t par)
+void immigrant(params_t par, int number)
 {
-    if (par.PI == 0) exit(0);
+    // start
+    sem_wait(sem.write);
+    fprintf(f, "%d\t: IMM %d\t\t: starts\n", sm->A, number);
+    sm->A++;
+    sem_post(sem.write);
+
+    // enter
+    sem_wait(sem.noJudge);
+    sem_wait(sem.write);
+    sm->NE++;
+    sm->NB++;
+    fprintf(f, "%d\t: IMM %d\t\t: enters\t\t\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, number, sm->NE, sm->NC, sm->NB);
+    sm->A++;
+    sem_post(sem.write);
+    sem_post(sem.noJudge);
+
+    // check
+    sem_wait(sem.checked);
+    sem_wait(sem.write);
+    sm->NC++;
+    fprintf(f, "%d\t: IMM %d\t\t: checks\t\t\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, number, sm->NE, sm->NC, sm->NB);
+    sm->A++;
+    sem_post(sem.write);
+
+    if ((sm->judge_entered == 1) && (sm->NE == sm->NC))
+    {
+        sem_post(sem.allSignedIn);
+    }
+    else
+    {
+        sem_post(sem.checked);
+    }
+
+    // wait for confirmation
+    sem_wait(sem.confirmed);
+
+    // want certificate
+    sem_wait(sem.write);
+    fprintf(f, "%d\t: IMM %d\t\t: wants certificate\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, number, sm->NE, sm->NC, sm->NB);
+    sm->A++;
+    sem_post(sem.write);
+
+    usleep((random() % (par.IT)) * 1000);
+
+    // get certificate
+    sem_wait(sem.write);
+    fprintf(f, "%d\t: IMM %d\t\t: got certificate\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, number, sm->NE, sm->NC, sm->NB);
+    sm->A++;
+    sem_post(sem.write);
+
+    // leave
+    sem_wait(sem.noJudge);
+    sem_wait(sem.write);
+    sm->NB--;
+    fprintf(f, "%d\t: IMM %d\t\t: leaves\t\t\t\t\t\t: %d\t\t: %d\t\t: %d\n", sm->A, number, sm->NE, sm->NC, sm->NB);
+    sm->A++;
+    sem_post(sem.write);
+    sem_post(sem.noJudge);
 
     exit(0);
 }
@@ -156,8 +292,32 @@ void init_resources()
     }
 
     // Semaphores
-    /* is this needed? */sem_unlink(SEM_NAME("write"));
-    if ((sem.write = sem_open(SEM_NAME("write"), O_CREAT | O_EXCL, 0666, 1)) == SEM_FAILED)
+    /* is this needed? */sem_unlink(SEM_NAME(write));
+    if ((sem.write = sem_open(SEM_NAME(write), O_CREAT | O_EXCL, 0666, 1)) == SEM_FAILED)
+    {
+        fprintf(stderr, "Error: failed to open semaphore.\n");
+        exit(1);
+    }
+    /* is this needed? */sem_unlink(SEM_NAME(checked));
+    if ((sem.checked = sem_open(SEM_NAME(checked), O_CREAT | O_EXCL, 0666, 1)) == SEM_FAILED)
+    {
+        fprintf(stderr, "Error: failed to open semaphore.\n");
+        exit(1);
+    }
+    /* is this needed? */sem_unlink(SEM_NAME(confirmed));
+    if ((sem.confirmed = sem_open(SEM_NAME(confirmed), O_CREAT | O_EXCL, 0666, 0)) == SEM_FAILED)
+    {
+        fprintf(stderr, "Error: failed to open semaphore.\n");
+        exit(1);
+    }
+    /* is this needed? */sem_unlink(SEM_NAME(noJudge));
+    if ((sem.noJudge = sem_open(SEM_NAME(noJudge), O_CREAT | O_EXCL, 0666, 1)) == SEM_FAILED)
+    {
+        fprintf(stderr, "Error: failed to open semaphore.\n");
+        exit(1);
+    }
+    /* is this needed? */sem_unlink(SEM_NAME(allSignedIn));
+    if ((sem.allSignedIn = sem_open(SEM_NAME(allSignedIn), O_CREAT | O_EXCL, 0666, 0)) == SEM_FAILED)
     {
         fprintf(stderr, "Error: failed to open semaphore.\n");
         exit(1);
@@ -169,7 +329,12 @@ void init_resources()
         fprintf(stderr, "Error: failed to allocate shared memory.\n");
         exit(1);
     }
-    sm->message_count = 1;
+    sm->judge_entered = 0;
+    sm->A = 1;
+    sm->I = 0;
+    sm->NE = 0;
+    sm->NC = 0;
+    sm->NB = 0;
 }
 
 void free_resources()
@@ -178,8 +343,16 @@ void free_resources()
     fclose(f);
 
     // Semaphores
-    sem_unlink(SEM_NAME("write"));
+    sem_unlink(SEM_NAME(write));
     sem.write = NULL;
+    sem_unlink(SEM_NAME(checked));
+    sem.checked = NULL;
+    sem_unlink(SEM_NAME(confirmed));
+    sem.confirmed = NULL;
+    sem_unlink(SEM_NAME(noJudge));
+    sem.noJudge = NULL;
+    sem_unlink(SEM_NAME(allSignedIn));
+    sem.allSignedIn = NULL;
 
     // Shared Memory
     munmap(sm, sizeof(sm_t));

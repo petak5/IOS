@@ -27,12 +27,20 @@ typedef struct params
 typedef struct semaphores
 {
     sem_t *write;
+    sem_t *checked;
+    sem_t *confirmed;
+    sem_t *noJudge;
+    sem_t *allSignedIn;
 } semaphores_t;
 
 typedef struct sm
 {
-    int message_count;
-    int entered;
+    int judge_entered;
+    int A;
+    int I;
+    int NE;
+    int NC;
+    int NB;
 } sm_t;
 
 params_t parse_params(int argc, char **argv);
@@ -45,6 +53,6 @@ void judge(params_t par);
 
 void imm_gen(params_t par);
 
-void immigrant(params_t par);
+void immigrant(params_t par, int number);
 
 #endif // __PROJ2_H__
