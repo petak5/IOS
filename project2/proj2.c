@@ -142,7 +142,7 @@ void imm_gen(params_t par)
         pid_t new_pid = fork();
         if (new_pid == 0)
         {
-            immigrant(par, i);
+            immigrant(par, i + 1);
         }
         else if (new_pid < 0)
         {
